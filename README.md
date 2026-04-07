@@ -38,25 +38,27 @@
 
 ## ✦ 시작하기
 
+**요구사항**: Node.js 18.18+ (Next.js 16 권장: Node 20 LTS)
+
 ```bash
-git clone <repo-url>
+git clone https://github.com/quantsquirrel/ease.git
 cd ease
 npm install
 npm run dev
 ```
 
-→ http://localhost:3000
+브라우저에서 http://localhost:3000 으로 접속합니다.
 
 ### 명령어
 
 | 명령 | 용도 |
 |---|---|
-| `npm run dev` | Turbopack 개발 서버 |
+| `npm run dev` | Turbopack 개발 서버 (localhost:3000) |
 | `npm run build` | 프로덕션 빌드 (타입 검증 포함) |
 | `npm run start` | 프로덕션 서버 |
-| `npm run lint` | ESLint |
+| `npm run lint` | ESLint (현재 config 이슈로 미동작 — 추후 수정 예정) |
 
-> 별도 테스트 러너 미설정. 빌드 성공 여부로 타입 안정성을 검증합니다.
+> 별도 테스트 러너 미설정. **`npm run build` 성공 여부로 타입 안정성을 검증**합니다.
 
 ## ✦ 기술 스택
 
