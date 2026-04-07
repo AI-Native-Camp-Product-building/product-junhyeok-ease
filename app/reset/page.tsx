@@ -195,6 +195,8 @@ export default function ResetPage() {
               css={css}
               dss={dss}
               goalChip={goalChip}
+              pre={preData}
+              post={postData}
               onDone={() => {
                 const session: Session = {
                   id: crypto.randomUUID(),
