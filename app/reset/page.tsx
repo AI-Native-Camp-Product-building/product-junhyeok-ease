@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import type { ResetStep, RTSnapshot, Session } from "@/lib/types";
-import { calculateCSS, calculateDSS } from "@/lib/score";
+import { calculateCSS, calculateDSS, sprintBaseline } from "@/lib/score";
 import { useAppState } from "@/lib/state-context";
 import { today } from "@/lib/state";
 import { countdownSequence } from "@/data/prompts";
@@ -24,10 +24,8 @@ const STEPS: { key: ResetStep; label: string }[] = [
   { key: "result", label: "결과" },
 ];
 
-const DEFAULT_BASELINE = { mean: 70, std: 15 };
-
 export default function ResetPage() {
-  const { recordSession } = useAppState();
+  const { state, recordSession } = useAppState();
   const [step, setStep] = useState<ResetStep>("idle");
   const [preData, setPreData] = useState<RTSnapshot | null>(null);
   const [postData, setPostData] = useState<RTSnapshot | null>(null);
@@ -190,7 +188,7 @@ export default function ResetPage() {
 
         {/* RESULT */}
         {step === "result" && preData && postData && (() => {
-          const css = calculateCSS(sprintScore, DEFAULT_BASELINE);
+          const css = calculateCSS(sprintScore, sprintBaseline(state.sessions));
           const dss = calculateDSS(preData, postData);
           return (
             <ResultView

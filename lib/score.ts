@@ -40,6 +40,28 @@ export function shadowBaseline(sessions: Session[]): number {
   return Math.round(recent.reduce((a, b) => a + b, 0) / recent.length);
 }
 
+/**
+ * Sprint Baseline
+ * 최근 7일 세션의 N-Back 정답률(sprint_score) 평균/표준편차.
+ * CSS의 z-score 정규화에 사용되는 개인화 baseline.
+ *
+ * 표본이 3개 미만이면 콜드스타트 기본값 {mean: 70, std: 15}를 반환한다.
+ * std 하한 5는 단일 이상치로 인한 z-score 폭주를 방지한다.
+ */
+export function sprintBaseline(sessions: Session[]): { mean: number; std: number } {
+  const recent = sessions
+    .filter((s) => Date.now() - s.timestamp < 7 * 24 * 60 * 60 * 1000)
+    .map((s) => s.sprint_score);
+
+  if (recent.length < 3) return { mean: 70, std: 15 };
+
+  const mean = recent.reduce((a, b) => a + b, 0) / recent.length;
+  const variance =
+    recent.reduce((sum, x) => sum + (x - mean) ** 2, 0) / (recent.length - 1);
+  const std = Math.max(5, Math.sqrt(variance));
+  return { mean, std };
+}
+
 /** 점수 등급 판정 */
 export function scoreTier(css: number): ScoreTier {
   if (css >= 70) return "excellent";
