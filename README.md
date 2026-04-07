@@ -41,8 +41,8 @@
 **요구사항**: Node.js 18.18+ (Next.js 16 권장: Node 20 LTS)
 
 ```bash
-git clone https://github.com/quantsquirrel/ease.git
-cd ease
+git clone https://github.com/AI-Native-Camp-Product-building/product-junhyeok-ease.git
+cd product-junhyeok-ease
 npm install
 npm run dev
 ```
