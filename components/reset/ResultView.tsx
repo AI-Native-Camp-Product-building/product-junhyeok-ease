@@ -9,6 +9,8 @@ export default function ResultView({
   goalChip,
   pre,
   post,
+  heroLine,
+  heroSub,
   onDone,
 }: {
   css: number;
@@ -16,23 +18,11 @@ export default function ResultView({
   goalChip: string;
   pre: RTSnapshot;
   post: RTSnapshot;
+  heroLine: string;
+  heroSub: string;
   onDone: () => void;
 }) {
   const selectedGoal = goalChips.find((c) => c.id === goalChip);
-
-  // Hero copy by delta sign (3-way split)
-  let heroLine: string;
-  let heroSub: string;
-  if (dss >= 1) {
-    heroLine = `당신의 초점이 ${dss}% 더 또렷해졌어요`;
-    heroSub = "작은 차이지만, 신경 시스템이 실제로 다르게 반응하고 있다는 뜻이에요";
-  } else if (dss <= -1) {
-    heroLine = "오늘은 회복이 더 필요해요";
-    heroSub = "충분히 쉬는 것도 회복입니다";
-  } else {
-    heroLine = "평소와 비슷한 컨디션이에요";
-    heroSub = "꾸준함이 가장 강한 신호예요";
-  }
 
   // Pulse period: faster RT → faster pulse. Bounded for perceptibility.
   const pulsePeriod = (ms: number) =>

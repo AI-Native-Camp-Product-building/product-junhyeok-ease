@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import type { ResetStep, RTSnapshot, Session } from "@/lib/types";
-import { calculateCSS, calculateDSS, sprintBaseline } from "@/lib/score";
+import { calculateCSS, calculateDSS, sprintBaseline, resultHero } from "@/lib/score";
 import { useAppState } from "@/lib/state-context";
 import { today } from "@/lib/state";
 import { countdownSequence } from "@/data/prompts";
@@ -190,6 +190,10 @@ export default function ResetPage() {
         {step === "result" && preData && postData && (() => {
           const css = calculateCSS(sprintScore, sprintBaseline(state.sessions));
           const dss = calculateDSS(preData, postData);
+          const hero = resultHero(
+            { dss, goal_chip: goalChip, pre: preData, post: postData },
+            state.sessions
+          );
           return (
             <ResultView
               css={css}
@@ -197,6 +201,8 @@ export default function ResetPage() {
               goalChip={goalChip}
               pre={preData}
               post={postData}
+              heroLine={hero.line}
+              heroSub={hero.sub}
               onDone={() => {
                 const session: Session = {
                   id: crypto.randomUUID(),
