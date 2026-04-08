@@ -1,11 +1,16 @@
-/** 목표 프라이밍 칩 옵션 */
+/**
+ * 목표 프라이밍 칩 옵션
+ * 칩은 "지금부터 5분 안에 실제로 할 수 있는 구체 행동"이어야 한다.
+ * 추상적 의도("집중하기")는 결과 CTA "{goal} 시작하기"와 결합될 때
+ * 어색해지므로 금지. id는 localStorage 호환을 위해 유지한다.
+ */
 export const goalChips = [
-  { id: "focus", label: "집중하기", icon: "🎯" },
-  { id: "create", label: "만들기", icon: "🛠" },
-  { id: "learn", label: "배우기", icon: "📖" },
-  { id: "exercise", label: "운동하기", icon: "💪" },
-  { id: "connect", label: "소통하기", icon: "💬" },
-  { id: "rest", label: "제대로 쉬기", icon: "🌿" },
+  { id: "focus", label: "한 가지에 집중", icon: "🎯" },
+  { id: "learn", label: "한 페이지 읽기", icon: "📖" },
+  { id: "create", label: "한 줄 메모", icon: "📝" },
+  { id: "exercise", label: "5분 산책", icon: "🚶" },
+  { id: "connect", label: "안부 한 마디", icon: "💬" },
+  { id: "rest", label: "물 한 잔", icon: "💧" },
 ] as const;
 
 /** 호흡 가이드 설정 */
